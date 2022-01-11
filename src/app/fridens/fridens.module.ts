@@ -9,6 +9,7 @@ import { BuscarComponent } from './pages/buscar/buscar.component';
 import { FridenComponent } from './pages/friden/friden.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ListadoComponent } from './pages/listado/listado.component';
+import { FridenTarjetaComponent } from './components/friden-tarjeta/friden-tarjeta.component';
 
 
 
@@ -18,7 +19,8 @@ import { ListadoComponent } from './pages/listado/listado.component';
     BuscarComponent,
     FridenComponent,
     HomeComponent,
-    ListadoComponent
+    ListadoComponent,
+    FridenTarjetaComponent
   ],
   imports: [
     CommonModule,
