@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-friden',
@@ -8,9 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FridenComponent implements OnInit {
 
-  constructor() { }
+  constructor(private activatedroute: ActivatedRoute) { }
 
   ngOnInit(): void {
-  }
+
+    this.activatedroute.params
+    .subscribe(({id}) => console.log(id))  }
 
 }
