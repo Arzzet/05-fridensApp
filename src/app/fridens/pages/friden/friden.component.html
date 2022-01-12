@@ -1,1 +1,39 @@
-<p>friden works!</p>
+<mat-grid-list cols="1" *ngIf="!friden; else divFriden">
+    <mat-grid-tile>
+        <mat-spinner></mat-spinner>
+    </mat-grid-tile>
+</mat-grid-list>
+
+<ng-template #divFriden>
+    <div fxLayout="row"
+    fxLayout.xl="column"
+    fxLayoutGap="30px">
+
+    <div fxFlex="50">
+        <h1>{{friden.friden_nombre}} <small>{{friden.nombre}}</small></h1>
+        <mat-divider></mat-divider>
+        <br>
+        <img [src]="friden | imagen">
+    </div>
+
+    <div fxFlex="50">
+        <h1>{{friden.titulo}}</h1>
+        <mat-divider></mat-divider>
+
+        <mat-list>
+            <mat-list-item>{{friden.primera_aparicion}}</mat-list-item>
+            <mat-list-item>{{friden.colores}}</mat-list-item>
+            <mat-list-item>{{friden.titulo}}</mat-list-item>
+            <mat-list-item>{{friden.nombre}}</mat-list-item>
+        </mat-list>
+
+        <br>
+        <button mat-button 
+                color="warn"
+                (click)="regresar()">Regresar</button>
+    </div>
+
+    </div>
+
+</ng-template>
+

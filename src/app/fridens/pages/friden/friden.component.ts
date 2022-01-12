@@ -1,19 +1,45 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Friden } from '../../interfaces/fridens.interface';
+import { FridensService } from '../../services/fridens.service';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-friden',
   templateUrl: './friden.component.html',
-  styles: [
+  styles: [`
+  img {
+    width: 100%;
+    border-radius: 10px;
+    }`
   ]
 })
 export class FridenComponent implements OnInit {
 
-  constructor(private activatedroute: ActivatedRoute) { }
+  friden!: Friden;
+
+  constructor(
+      private activatedroute: ActivatedRoute,
+      private fridensService: FridensService,
+      private router: Router 
+  ) { }
+      
 
   ngOnInit(): void {
 
     this.activatedroute.params
-    .subscribe(({id}) => console.log(id))  }
+      .pipe(
+        switchMap(({id}) => this.fridensService.getFridenPorId(id))
+      )
+      .subscribe(friden => this.friden = friden) 
+  
+    
+  }
+
+  regresar(){
+    this.router.navigate(['/fridens/listado']);
+  }
+
+    
 
 }

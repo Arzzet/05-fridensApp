@@ -1,16 +1,16 @@
 <mat-card>
     <mat-card-header>
-        <mat-card-title>{{friden.superhero}}</mat-card-title>
-        <mat-card-subtitle>{{friden.alter_ego}}</mat-card-subtitle>
+        <mat-card-title>{{friden.friden_nombre}}</mat-card-title>
+        <mat-card-subtitle>{{friden.nombre}}</mat-card-subtitle>
     </mat-card-header>
     <!-- <img mat-card-image src="assets/fridens/{{friden.id}}.jpg"> -->
     <img mat-card-image [src]="friden | imagen">
     <mat-card-content>
-        <h3>{{friden.publisher}}</h3>
+        <h3>{{friden.titulo}}</h3>
         <p>
-            <strong>Primera aparición</strong> {{friden.first_appearance}}<br>
+            <strong>Primera aparición</strong> {{friden.primera_aparicion}}<br>
             <br>
-            <strong>Personajes:</strong> {{friden.characters}}
+            <strong>Colores:</strong> {{friden.colores}}
         </p>
     </mat-card-content>
 

@@ -6,7 +6,11 @@ import { FridensService } from '../../services/fridens.service';
 @Component({
   selector: 'app-friden-tarjeta',
   templateUrl: './friden-tarjeta.component.html',
-  styles: [
+  styles: [`
+  mat-card {
+    margin-top: 20px;
+  }
+`
   ]
 })
 export class FridenTarjetaComponent {
