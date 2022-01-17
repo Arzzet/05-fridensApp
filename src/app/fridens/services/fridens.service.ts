@@ -20,4 +20,8 @@ export class FridensService {
   getFridenPorId(id: string): Observable<Friden>{
     return this.http.get<Friden>(`${this.baseUrl}/fridens/${id}`)
   }
+
+  getSugerencias(termino: string): Observable<Friden[]>{
+    return this.http.get<Friden[]>(`${this.baseUrl}/fridens?q=${termino}&_limit=6`);
+  }
 }
