@@ -1,18 +1,22 @@
-<h1>Nuevo friden <small>asd</small></h1>
+<h1>Nuevo friden <small>{{friden.friden_nombre}}</small></h1>
 
 <div fxLayout="row" fxLayoutGap="40px">
     <div fxFlex="50" fxLayout="column">
-        <div fxLayout="row" fxLayoutGap="20px">
+        <div fxLayout="row" 
+             fxLayout.xs="column"
+             fxLayoutGap="20px">
             <mat-form-field fxFlex="100">
                 <mat-label>Friden</mat-label>
                 <input matInput
                        type="text"
+                       [(ngModel)]="friden.friden_nombre"
                        required>
             </mat-form-field>
             <mat-form-field fxFlex="100">
                 <mat-label>Friden_Nombre</mat-label>
                 <input matInput
                        type="text"
+                       [(ngModel)]="friden.nombre"
                        required>
             </mat-form-field>
         </div>
@@ -20,17 +24,20 @@
             <mat-label>Primera aparicion</mat-label>
             <input matInput
                    type="text"
+                   [(ngModel)]="friden.primera_aparicion"
                    required>
         </mat-form-field>
         <mat-form-field fxFlex="100">
             <mat-label>Personajes</mat-label>
             <input matInput
                    type="text"
+                   [(ngModel)]="friden.colores"
                    required>
         </mat-form-field>
         <mat-form-field fxFlex="100">
             <mat-label>Creador</mat-label>
-            <mat-select>
+            <mat-select [(ngModel)]="friden.publisher"
+                        required>
                 <mat-option *ngFor="let publisher of publishers"
                             [value]="publisher.id">
                     {{publisher.desc}}
@@ -41,12 +48,15 @@
             <mat-label>Foto Url</mat-label>
             <input matInput
                    type="url"
+                   [(ngModel)]="friden.alt_img"
                    required>
         </mat-form-field>
 
         <br>
 
-        <button mat-raised-button color="warn">
+        <button mat-raised-button 
+                color="warn"
+                (click)="guardar()">
             <mat-icon>edit</mat-icon>
             Guardar
         </button>

@@ -24,4 +24,12 @@ export class FridensService {
   getSugerencias(termino: string): Observable<Friden[]>{
     return this.http.get<Friden[]>(`${this.baseUrl}/fridens?q=${termino}&_limit=6`);
   }
+
+  agregarFriden(friden: Friden): Observable<Friden> {
+    return this.http.post<Friden>(`${this.baseUrl}/fridens`, friden);
+  }
+
+  actualizarFriden(friden: Friden): Observable<Friden> {
+    return this.http.put<Friden>(`${this.baseUrl}/fridens/${friden.id}`, friden);
+  }
 }

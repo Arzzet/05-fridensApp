@@ -4,7 +4,7 @@ export interface Friden {
     titulo:            string;
     nombre:            string;
     primera_aparicion: string;
-    colores:           string[] | string;
+    colores:           string[];
     alt_img?:          string; // https://ewv.com/img.png
     publisher:         Publisher;
 }
