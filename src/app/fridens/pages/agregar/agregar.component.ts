@@ -4,6 +4,8 @@ import { FridensService } from '../../services/fridens.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmarComponent } from '../../components/confirmar/confirmar.component';
 
 @Component({
   selector: 'app-agregar',
@@ -43,7 +45,8 @@ export class AgregarComponent implements OnInit {
   constructor(private fridensService: FridensService,
               private activatedRoute: ActivatedRoute,
               private router: Router,
-              private snackBar: MatSnackBar) { }
+              private snackBar: MatSnackBar,
+              public dialog: MatDialog) { }
 
   ngOnInit(): void {
 
@@ -79,15 +82,28 @@ export class AgregarComponent implements OnInit {
   }
 
   borrar() {
-    this.fridensService.borrarFriden(this.friden.id!)
-      .subscribe(resp => {
-        this.router.navigate(['/fridens']);
-      });
+
+    const dialog = this.dialog.open(ConfirmarComponent, {
+      width: '350px',
+      data: {...this.friden}
+    })
+
+    dialog.afterClosed().subscribe(
+      (result) => {
+        if(result){
+          this.fridensService.borrarFriden(this.friden.id!)
+            .subscribe(resp => {
+              this.router.navigate(['/fridens']);
+            });
+        }
+      }
+    )
+
   }
 
   mostrarSnackbar(mensaje: string) {
     this.snackBar.open( mensaje, 'Cerrar', {
-      duration: 3000
+      duration: 2500
     } );
   }
 }
