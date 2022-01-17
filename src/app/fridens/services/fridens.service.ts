@@ -32,4 +32,8 @@ export class FridensService {
   actualizarFriden(friden: Friden): Observable<Friden> {
     return this.http.put<Friden>(`${this.baseUrl}/fridens/${friden.id}`, friden);
   }
+
+  borrarFriden(id: string): Observable<any> {
+    return this.http.delete<any>(`${this.baseUrl}/fridens/${id}`);
+  }
 }

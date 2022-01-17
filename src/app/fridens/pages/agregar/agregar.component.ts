@@ -3,11 +3,17 @@ import { Friden, Publisher } from '../../interfaces/fridens.interface';
 import { FridensService } from '../../services/fridens.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-agregar',
   templateUrl: './agregar.component.html',
-  styles: [
+  styles: [`
+    img {
+      width: 100%;
+      border-radius: 10px;
+    }
+  `
   ]
 })
 export class AgregarComponent implements OnInit {
@@ -36,14 +42,20 @@ export class AgregarComponent implements OnInit {
 
   constructor(private fridensService: FridensService,
               private activatedRoute: ActivatedRoute,
-              private router: Router) { }
+              private router: Router,
+              private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
+
+    if(!this.router.url.includes('editar')){
+      return
+    }
     this.activatedRoute.params
       .pipe(
         switchMap( ({id}) => this.fridensService.getFridenPorId(id))
       )
       .subscribe(friden => this.friden = friden);
+
   }
 
   guardar() {
@@ -54,7 +66,7 @@ export class AgregarComponent implements OnInit {
     if(this.friden.id) {
       // Actualizar friden
       this.fridensService.actualizarFriden(this.friden)
-        .subscribe(friden => console.log('Actualizando friden', friden))
+        .subscribe(friden => this.mostrarSnackbar('Registro actualizado'))
     } else {
       // Crear friden
       this.fridensService.agregarFriden(this.friden)
@@ -66,4 +78,16 @@ export class AgregarComponent implements OnInit {
 
   }
 
+  borrar() {
+    this.fridensService.borrarFriden(this.friden.id!)
+      .subscribe(resp => {
+        this.router.navigate(['/fridens']);
+      });
+  }
+
+  mostrarSnackbar(mensaje: string) {
+    this.snackBar.open( mensaje, 'Cerrar', {
+      duration: 3000
+    } );
+  }
 }
