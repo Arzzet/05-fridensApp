@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import { ErrorPageComponent } from './shared/error-page/error-page.component';
+
+import { AuthGuard } from './auth/guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -11,7 +14,9 @@ const routes: Routes = [
   {
     path: 'fridens',
     loadChildren: () => import('./fridens/fridens.module')
-      .then(m => m.FridensModule)
+      .then(m => m.FridensModule),
+      canLoad: [AuthGuard],
+      canActivate: [AuthGuard]
   },
   {
     path: '404',
